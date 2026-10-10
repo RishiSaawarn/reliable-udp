@@ -572,7 +572,7 @@ Stated plainly, because they bound every claim above:
 9. **Linux/IPv4 only.** `ppoll`, `CLOCK_MONOTONIC`, `sockaddr_in`.
 
 ---
-
+<!-- 
 ## 11. Further reading in this repo
 
 - **[docs/PROTOCOL.md](docs/PROTOCOL.md)** — normative wire format, state
@@ -582,4 +582,4 @@ Stated plainly, because they bound every claim above:
   one grounded in what this code actually does.
 - **[docs/CV_AUDIT.md](docs/CV_AUDIT.md)** — every claim I could make about this
   project, with its evidence, its exact benchmark configuration, and an honest
-  verdict on whether it survives an interviewer pushing back.
+  verdict on whether it survives an interviewer pushing back. -->
