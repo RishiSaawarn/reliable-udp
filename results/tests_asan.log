@@ -1,0 +1,168 @@
+[ RUN      ] packet :: crc32c matches the published check value
+[       OK ] packet :: crc32c matches the published check value (0 ms)
+[ RUN      ] packet :: sha256 matches published vectors
+[       OK ] packet :: sha256 matches published vectors (17 ms)
+[ RUN      ] packet :: header round-trips with payload and sack blocks
+[       OK ] packet :: header round-trips with payload and sack blocks (0 ms)
+[ RUN      ] packet :: wire format is big-endian and 24 bytes of header
+[       OK ] packet :: wire format is big-endian and 24 bytes of header (0 ms)
+[ RUN      ] packet :: every single-bit flip is detected
+[       OK ] packet :: every single-bit flip is detected (2 ms)
+[ RUN      ] packet :: truncated and over-long datagrams are rejected
+[       OK ] packet :: truncated and over-long datagrams are rejected (0 ms)
+[ RUN      ] packet :: bad version, type, reserved and sack count are rejected
+[       OK ] packet :: bad version, type, reserved and sack count are rejected (0 ms)
+[ RUN      ] packet :: declared payload length inconsistent with datagram size is rejected
+[       OK ] packet :: declared payload length inconsistent with datagram size is rejected (0 ms)
+[ RUN      ] packet :: random garbage never parses as valid and never reads out of bounds
+[       OK ] packet :: random garbage never parses as valid and never reads out of bounds (93 ms)
+[ RUN      ] seq :: serial arithmetic is correct across the 32-bit wrap point
+[       OK ] seq :: serial arithmetic is correct across the 32-bit wrap point (0 ms)
+[ RUN      ] seq :: range test wraps
+[       OK ] seq :: range test wraps (0 ms)
+[ RUN      ] seq :: config normalises windows to powers of two
+[       OK ] seq :: config normalises windows to powers of two (0 ms)
+[ RUN      ] rtt :: first sample seeds srtt and rttvar per RFC 6298 2.2
+[       OK ] rtt :: first sample seeds srtt and rttvar per RFC 6298 2.2 (0 ms)
+[ RUN      ] rtt :: subsequent samples apply the 1/8 and 1/4 gains
+[       OK ] rtt :: subsequent samples apply the 1/8 and 1/4 gains (0 ms)
+[ RUN      ] rtt :: a stable link converges to a tight RTO
+[       OK ] rtt :: a stable link converges to a tight RTO (0 ms)
+[ RUN      ] rtt :: timeouts back the RTO off exponentially and a sample restores it
+[       OK ] rtt :: timeouts back the RTO off exponentially and a sample restores it (0 ms)
+[ RUN      ] rtt :: the RTO is clamped to the configured floor and ceiling
+[       OK ] rtt :: the RTO is clamped to the configured floor and ceiling (0 ms)
+[ RUN      ] sim :: loss probability is honoured within statistical tolerance
+[       OK ] sim :: loss probability is honoured within statistical tolerance (889 ms)
+[ RUN      ] sim :: duplication and reordering probabilities are honoured
+[       OK ] sim :: duplication and reordering probabilities are honoured (83 ms)
+[ RUN      ] sim :: the same seed produces an identical event stream
+[       OK ] sim :: the same seed produces an identical event stream (26 ms)
+[ RUN      ] sim :: delay and jitter land in the configured band
+[       OK ] sim :: delay and jitter land in the configured band (8 ms)
+[ RUN      ] sim :: rate limiting serialises packets onto the link
+[       OK ] sim :: rate limiting serialises packets onto the link (0 ms)
+[ RUN      ] sim :: a drop-tail queue limit drops the overflow
+[       OK ] sim :: a drop-tail queue limit drops the overflow (0 ms)
+[ RUN      ] sim :: reordering actually delivers packets out of transmit order
+[       OK ] sim :: reordering actually delivers packets out of transmit order (3 ms)
+[ RUN      ] sim :: a scripted fault overrides the probabilistic model
+[       OK ] sim :: a scripted fault overrides the probabilistic model (0 ms)
+[ RUN      ] sim :: corruption flips exactly one bit
+[       OK ] sim :: corruption flips exactly one bit (1 ms)
+[ RUN      ] transfer :: 01 zero loss delivers byte-for-byte with no retransmission
+[       OK ] transfer :: 01 zero loss delivers byte-for-byte with no retransmission (13 ms)
+[ RUN      ] transfer :: 02 a single lost DATA packet is selectively retransmitted
+[       OK ] transfer :: 02 a single lost DATA packet is selectively retransmitted (6 ms)
+[ RUN      ] transfer :: 03 multiple scattered losses each cost exactly one retransmit
+[       OK ] transfer :: 03 multiple scattered losses each cost exactly one retransmit (17 ms)
+[ RUN      ] transfer :: 04 a contiguous burst loss is recovered
+[       OK ] transfer :: 04 a contiguous burst loss is recovered (10 ms)
+[ RUN      ] transfer :: 05 every DATA packet duplicated: delivered exactly once
+[       OK ] transfer :: 05 every DATA packet duplicated: delivered exactly once (7 ms)
+[ RUN      ] transfer :: 06 heavy reordering without loss causes no retransmission storm
+[       OK ] transfer :: 06 heavy reordering without loss causes no retransmission storm (7 ms)
+[ RUN      ] transfer :: 06b the reordering window is what keeps spurious retransmits down
+[       OK ] transfer :: 06b the reordering window is what keeps spurious retransmits down (13 ms)
+[ RUN      ] transfer :: 07 large delay and jitter are absorbed by the adaptive RTO
+[       OK ] transfer :: 07 large delay and jitter are absorbed by the adaptive RTO (7 ms)
+[ RUN      ] transfer :: 08 duplicated ACKs do not trigger spurious retransmission
+[       OK ] transfer :: 08 duplicated ACKs do not trigger spurious retransmission (6 ms)
+[ RUN      ] transfer :: 09 heavily delayed ACKs still complete the transfer
+[       OK ] transfer :: 09 heavily delayed ACKs still complete the transfer (5 ms)
+[ RUN      ] transfer :: 10 a lossy ACK path is recovered by cumulative ACKs
+[       OK ] transfer :: 10 a lossy ACK path is recovered by cumulative ACKs (6 ms)
+[ RUN      ] transfer :: 11 a packet lost repeatedly is retried until it lands
+[       OK ] transfer :: 11 a packet lost repeatedly is retried until it lands (2 ms)
+[ RUN      ] transfer :: 12 sequence numbers wrap through 2^32 mid-transfer
+[       OK ] transfer :: 12 sequence numbers wrap through 2^32 mid-transfer (19 ms)
+[ RUN      ] transfer :: 12b wraparound also works cleanly with zero loss
+[       OK ] transfer :: 12b wraparound also works cleanly with zero loss (13 ms)
+[ RUN      ] transfer :: 13 the sender stalls on a full window instead of overrunning it
+[       OK ] transfer :: 13 the sender stalls on a full window instead of overrunning it (9 ms)
+[ RUN      ] transfer :: 14 a stalled application drives the receive window to zero
+[       OK ] transfer :: 14 a stalled application drives the receive window to zero (9 ms)
+[ RUN      ] transfer :: 14c the transfer still completes if the window update is lost
+[       OK ] transfer :: 14c the transfer still completes if the window update is lost (6 ms)
+[ RUN      ] transfer :: 14b an explicit zero-window probe fires when the pipe is empty
+[       OK ] transfer :: 14b an explicit zero-window probe fires when the pipe is empty (0 ms)
+[ RUN      ] transfer :: 15 out-of-order packets are buffered, not discarded
+[       OK ] transfer :: 15 out-of-order packets are buffered, not discarded (6 ms)
+[ RUN      ] transfer :: 16 duplicates of already-delivered data are dropped and re-ACKed
+[       OK ] transfer :: 16 duplicates of already-delivered data are dropped and re-ACKed (3 ms)
+[ RUN      ] transfer :: 17 the session terminates cleanly with FIN / FIN_ACK
+[       OK ] transfer :: 17 the session terminates cleanly with FIN / FIN_ACK (1 ms)
+[ RUN      ] transfer :: 17b a lost FIN is retransmitted until FIN_ACK arrives
+[       OK ] transfer :: 17b a lost FIN is retransmitted until FIN_ACK arrives (0 ms)
+[ RUN      ] transfer :: 17c a lost SYN is retransmitted until SYN_ACK arrives
+[       OK ] transfer :: 17c a lost SYN is retransmitted until SYN_ACK arrives (0 ms)
+[ RUN      ] transfer :: 17d the handshake gives up after the configured retry budget
+[       OK ] transfer :: 17d the handshake gives up after the configured retry budget (0 ms)
+[ RUN      ] transfer :: 18 an empty transfer completes
+[       OK ] transfer :: 18 an empty transfer completes (0 ms)
+[ RUN      ] transfer :: 19 a one-byte transfer completes, with and without loss
+[       OK ] transfer :: 19 a one-byte transfer completes, with and without loss (0 ms)
+[ RUN      ] transfer :: 19b partial final packet is preserved exactly
+[       OK ] transfer :: 19b partial final packet is preserved exactly (0 ms)
+[ RUN      ] transfer :: 20 an 8 MB transfer over a 5%% loss link completes
+[       OK ] transfer :: 20 an 8 MB transfer over a 5%% loss link completes (280 ms)
+[ RUN      ] transfer :: 21 randomised fault injection over 120 configurations
+[       OK ] transfer :: 21 randomised fault injection over 120 configurations (448 ms)
+[ RUN      ] transfer :: 22 the same seed reproduces an identical run, bit for bit
+[       OK ] transfer :: 22 the same seed reproduces an identical run, bit for bit (47 ms)
+[ RUN      ] transfer :: 23 loss x delay x reorder x duplication combinations
+[       OK ] transfer :: 23 loss x delay x reorder x duplication combinations (74 ms)
+[ RUN      ] corrupt :: a corrupted header is rejected as a bad checksum
+[       OK ] corrupt :: a corrupted header is rejected as a bad checksum (0 ms)
+[ RUN      ] corrupt :: a corrupted payload is rejected as a bad checksum
+[       OK ] corrupt :: a corrupted payload is rejected as a bad checksum (0 ms)
+[ RUN      ] corrupt :: a corrupted checksum field itself is rejected
+[       OK ] corrupt :: a corrupted checksum field itself is rejected (0 ms)
+[ RUN      ] corrupt :: a packet for a different session is counted and ignored
+[       OK ] corrupt :: a packet for a different session is counted and ignored (0 ms)
+[ RUN      ] corrupt :: sequence numbers outside the receive window are rejected
+[       OK ] corrupt :: sequence numbers outside the receive window are rejected (0 ms)
+[ RUN      ] corrupt :: a payload larger than the local MTU is rejected, not overrun
+[       OK ] corrupt :: a payload larger than the local MTU is rejected, not overrun (0 ms)
+[ RUN      ] corrupt :: data before a handshake is ignored
+[       OK ] corrupt :: data before a handshake is ignored (0 ms)
+[ RUN      ] corrupt :: a duplicated SYN re-answers without resetting the session
+[       OK ] corrupt :: a duplicated SYN re-answers without resetting the session (0 ms)
+[ RUN      ] corrupt :: malformed and truncated datagrams never crash the receiver
+[       OK ] corrupt :: malformed and truncated datagrams never crash the receiver (0 ms)
+[ RUN      ] corrupt :: fuzzing the receiver with mutated packets is safe
+[       OK ] corrupt :: fuzzing the receiver with mutated packets is safe (226 ms)
+[ RUN      ] corrupt :: fuzzing the sender with mutated packets is safe
+[       OK ] corrupt :: fuzzing the sender with mutated packets is safe (113 ms)
+[ RUN      ] corrupt :: an on-wire corruption rate of 5%% still delivers the file intact
+[       OK ] corrupt :: an on-wire corruption rate of 5%% still delivers the file intact (10 ms)
+[ RUN      ] refmodel :: receiver matches the model over 200k randomised arrivals
+[       OK ] refmodel :: receiver matches the model over 200k randomised arrivals (868 ms)
+[ RUN      ] refmodel :: sender obeys every window and retransmission rule the model checks
+[       OK ] refmodel :: sender obeys every window and retransmission rule the model checks (121 ms)
+[ RUN      ] refmodel :: full transfers agree with the model fed the ground-truth trace
+[       OK ] refmodel :: full transfers agree with the model fed the ground-truth trace (147 ms)
+[ RUN      ] alloc :: the probe itself works
+[       OK ] alloc :: the probe itself works (0 ms)
+[ RUN      ] alloc :: a full windowed transfer performs zero heap allocations
+[       OK ] alloc :: a full windowed transfer performs zero heap allocations (23 ms)
+[ RUN      ] alloc :: loss and reordering on the hot path still allocate nothing
+[       OK ] alloc :: loss and reordering on the hot path still allocate nothing (12 ms)
+[ RUN      ] realnet :: a 4 MB transfer over loopback UDP is byte-exact
+[       OK ] realnet :: a 4 MB transfer over loopback UDP is byte-exact (198 ms)
+[ RUN      ] realnet :: an empty transfer over a real socket completes
+[       OK ] realnet :: an empty transfer over a real socket completes (71 ms)
+[ RUN      ] realnet :: 10%% injected loss on both directions of a real socket recovers
+[       OK ] realnet :: 10%% injected loss on both directions of a real socket recovers (134 ms)
+[ RUN      ] realnet :: a receiver with no peer gives up instead of hanging
+[       OK ] realnet :: a receiver with no peer gives up instead of hanging (301 ms)
+[ RUN      ] realnet :: a sender to a dead port gives up instead of hanging
+[       OK ] realnet :: a sender to a dead port gives up instead of hanging (300 ms)
+[ RUN      ] realnet :: the server accepts a single session and hashes it correctly
+[       OK ] realnet :: the server accepts a single session and hashes it correctly (161 ms)
+[ RUN      ] realnet :: the server runs 8 concurrent sessions with isolated state
+[       OK ] realnet :: the server runs 8 concurrent sessions with isolated state (293 ms)
+[ RUN      ] realnet :: the server rejects an unknown session with RST
+[       OK ] realnet :: the server rejects an unknown session with RST (2 ms)
+
+83 passed, 0 failed, 0 filtered out (5143 ms)

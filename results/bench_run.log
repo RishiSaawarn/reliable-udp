@@ -1,0 +1,148 @@
+########## bench_reliability ##########
+=== environment ===============================================================
+  timestamp    : 2026-08-27T00:50:00Z
+  cpu          : 13th Gen Intel(R) Core(TM) i5-13500H
+  topology     : 16 logical CPUs (12 cores/socket, 16 siblings/socket)
+  max freq     : 4700 MHz   scaling governor: powersave
+  os           : Ubuntu 25.10
+  kernel       : Linux 6.17.0-41-generic x86_64
+  compiler     : g++ 15.2.0   (__cplusplus=202002)
+  build type   : Release
+  flags        :  -O3 -DNDEBUG
+===============================================================================
+
+payload=4194304 B, packet=1200 B, window=64 pkts, recv_window=128 pkts, reps=9
+seeds: 1000+rep (deterministic)
+
+scenario                         ok   time(ms)   gp(Mb/s)      pkts      retx     retx%    meanRTT   RTO(ms)
+----------------------------------------------------------------------------------------------------------------------
+loss 0%  / no delay            9/9       100.0     335.54      3496         0     0.000          1       5.0
+loss 1%  / no delay            9/9       100.0     335.54      3535        39     1.103          1       5.0
+loss 5%  / no delay            9/9       140.0     239.67      3677       181     4.922          1       5.0
+loss 10% / no delay            9/9       245.0     136.96      3878       382     9.850          1      10.0
+loss 20% / no delay            9/9       440.0      76.26      4385       889    20.274          1      20.0
+loss 0%  / 50ms RTT            9/9      2991.7      11.22      3586        90     2.510      46522      64.9
+loss 1%  / 50ms RTT            9/9      3951.2       8.49      3600       104     2.889      46907      64.3
+loss 5%  / 50ms RTT            9/9      5857.2       5.73      3728       232     6.223      47372     121.1
+loss 10% / 50ms RTT            9/9      7982.7       4.20      3999       503    12.578      47653     130.7
+loss 20% / 50ms RTT            9/9     14183.0       2.37      4790      1294    27.015      48908     251.2
+loss 5%  + 10% dup             9/9      5623.7       5.97      3730       234     6.273      47132     120.1
+loss 5%  + 30% reorder         9/9      9461.5       3.55      3738       242     6.474      60362     287.8
+loss 5%  + dup + reorder       9/9      9403.9       3.57      3753       257     6.848      58845     225.5
+loss 10% + dup + reorder       9/9     13226.2       2.54      3971       475    11.962      59511     273.5
+loss 20% + dup + reorder       9/9     25609.4       1.31      4634      1138    24.558      62701    1012.6
+
+--- distributions (median [min | p25 | p75 | max]) ---------------------------
+(full per-repetition data in results/reliability.csv)
+
+0 failing repetition(s) out of 135.
+### bench_reliability exit=0
+########## bench_throughput ##########
+=== environment ===============================================================
+  timestamp    : 2026-08-27T00:50:07Z
+  cpu          : 13th Gen Intel(R) Core(TM) i5-13500H
+  topology     : 16 logical CPUs (12 cores/socket, 16 siblings/socket)
+  max freq     : 4700 MHz   scaling governor: powersave
+  os           : Ubuntu 25.10
+  kernel       : Linux 6.17.0-41-generic x86_64
+  compiler     : g++ 15.2.0   (__cplusplus=202002)
+  build type   : Release
+  flags        :  -O3 -DNDEBUG
+===============================================================================
+
+transport: real UDP over loopback (127.0.0.1), sender and receiver threads
+packet=1200 B payload, send_window=256 pkts, recv_window=512 pkts
+SO_RCVBUF requested=33554432 B, SO_SNDBUF requested=33554432 B
+1 warm-up run per size, discarded; 9/9/5 measured repetitions
+
+size         runs    time(ms)     goodput       pkts     retx    retx%  kern-drop   RTT(us)    cpu/MB
+---------------------------------------------------------------------------------------------------------
+1 MB            9        27.1    310.0 Mb/s       1229      355   28.885        253      2671    38.63 ms
+           goodput  median=310  [min 260.3 | p25 286.2 | p75 361.7 | max 400.6]  mean=323 sd=48.53 n=9
+           time(ms) median=27.06  [min 20.94 | p25 23.19 | p75 29.31 | max 32.23]  mean=26.49 sd=3.89 n=9
+           retx%    median=28.89  [min 25.55 | p25 27.35 | p75 33.18 | max 37.57]  mean=30.39 sd=4.054 n=9
+10 MB           9       130.9    640.9 Mb/s      10634     1895   17.820       1739      1382    18.78 ms
+           goodput  median=640.9  [min 601.4 | p25 633.7 | p75 672.6 | max 688]  mean=648.1 sd=27.68 n=9
+           time(ms) median=130.9  [min 121.9 | p25 124.7 | p75 132.4 | max 139.5]  mean=129.7 sd=5.55 n=9
+           retx%    median=17.82  [min 16.12 | p25 17.43 | p75 17.98 | max 18.35]  mean=17.54 sd=0.7147 n=9
+100 MB          5      1171.8    715.9 Mb/s     104587    17205   16.450      16600      1299    16.80 ms
+           goodput  median=715.9  [min 686.9 | p25 711.8 | p75 722.6 | max 726.1]  mean=712.7 sd=15.47 n=5
+           time(ms) median=1172  [min 1155 | p25 1161 | p75 1178 | max 1221]  mean=1178 sd=26.09 n=5
+           retx%    median=16.45  [min 15.44 | p25 15.46 | p75 16.55 | max 16.63]  mean=16.11 sd=0.6035 n=5
+
+per-repetition data: results/throughput.csv
+0 failing repetition(s).
+### bench_throughput exit=0
+########## bench_window ##########
+=== environment ===============================================================
+  timestamp    : 2026-08-27T00:50:17Z
+  cpu          : 13th Gen Intel(R) Core(TM) i5-13500H
+  topology     : 16 logical CPUs (12 cores/socket, 16 siblings/socket)
+  max freq     : 4700 MHz   scaling governor: powersave
+  os           : Ubuntu 25.10
+  kernel       : Linux 6.17.0-41-generic x86_64
+  compiler     : g++ 15.2.0   (__cplusplus=202002)
+  build type   : Release
+  flags        :  -O3 -DNDEBUG
+===============================================================================
+
+=== (A) simulated link: 25 ms one-way delay (50 ms RTT), 100 Mbit/s, 1% loss ===
+payload=8388608 B, packet=1200 B, reps=9, seeds 500+rep
+bandwidth-delay product = 520.8 packets, so windows above ~521 should not help
+
+window      time(ms)      goodput       pkts       retx     retx%    meanRTT      stalls
+----------------------------------------------------------------------------------------
+8            46460.1      1.44 Mb/s       7087         96     1.355      49881       21128
+16           24372.0      2.75 Mb/s       7100        109     1.535      49675       21128
+32           13247.6      5.07 Mb/s       7130        139     1.950      49579       21156
+64            7446.5      9.01 Mb/s       7246        255     3.519      49878       21400
+128           4464.3     15.03 Mb/s       7900        909    11.506      51161       22986
+
+=== (B) real UDP over loopback (no artificial delay or loss) =================
+payload=20971520 B, packet=1200 B, reps=9, 1 warm-up discarded per window
+
+window      time(ms)      goodput       pkts       retx     retx%    meanRTT   kern-drop
+----------------------------------------------------------------------------------------
+8              234.1    716.58 Mb/s      17477          0     0.000         73           0
+         goodput median=716.6  [min 666 | p25 688.6 | p75 737.7 | max 740.1]  mean=712.7 sd=27.47 n=9
+16             237.7    705.82 Mb/s      17477          0     0.000        150           0
+         goodput median=705.8  [min 685.6 | p25 700.2 | p75 718.1 | max 725.5]  mean=708.1 sd=13.14 n=9
+32             224.4    747.67 Mb/s      17477          0     0.000        276           0
+         goodput median=747.7  [min 709.3 | p25 722.4 | p75 747.9 | max 752.8]  mean=736.5 sd=16.11 n=9
+64             224.8    746.40 Mb/s      17477          0     0.000        552           0
+         goodput median=746.4  [min 712.8 | p25 727.4 | p75 748.5 | max 750.5]  mean=737.3 sd=13.76 n=9
+128            235.6    712.20 Mb/s      17477          0     0.000       1151           0
+         goodput median=712.2  [min 678.4 | p25 695.8 | p75 727 | max 746.5]  mean=710.8 sd=22.85 n=9
+
+per-repetition data: results/window.csv
+### bench_window exit=0
+########## bench_concurrency ##########
+=== environment ===============================================================
+  timestamp    : 2026-08-27T00:50:34Z
+  cpu          : 13th Gen Intel(R) Core(TM) i5-13500H
+  topology     : 16 logical CPUs (12 cores/socket, 16 siblings/socket)
+  max freq     : 4700 MHz   scaling governor: powersave
+  os           : Ubuntu 25.10
+  kernel       : Linux 6.17.0-41-generic x86_64
+  compiler     : g++ 15.2.0   (__cplusplus=202002)
+  build type   : Release
+  flags        :  -O3 -DNDEBUG
+===============================================================================
+
+server: 1 UDP socket, 1 rx thread, 1 timer thread, 8 MiB per session
+clients: one thread and one socket each; 5 measured repetitions + 1 warm-up
+
+sessions        ok    wall(ms)      aggregate      per-session     retx%    meanRTT     cpu/MB
+------------------------------------------------------------------------------------------------
+1             5/5        113.7      590.1 Mb/s       798.5 Mb/s    18.954       1475    22.23 ms
+           aggregate median=590.1  [min 562.2 | p25 571.9 | p75 616.8 | max 622.9]  mean=592.8 sd=26.75 n=5
+2             5/5        171.8      781.2 Mb/s       476.9 Mb/s    35.504       1475    21.24 ms
+           aggregate median=781.2  [min 721.3 | p25 746.3 | p75 781.2 | max 795.4]  mean=765.1 sd=30.45 n=5
+4             5/5        310.6      864.2 Mb/s       253.7 Mb/s    42.779       1622    23.28 ms
+           aggregate median=864.2  [min 819.5 | p25 847.7 | p75 872.9 | max 898.1]  mean=860.5 sd=29.24 n=5
+8             5/5        614.7      873.3 Mb/s       139.4 Mb/s    49.341       1682    25.65 ms
+           aggregate median=873.3  [min 755.7 | p25 870.3 | p75 889.9 | max 912.1]  mean=860.3 sd=60.79 n=5
+
+per-repetition data: results/concurrency.csv
+0 failing repetition(s).
+### bench_concurrency exit=0
